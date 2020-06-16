@@ -10,3 +10,11 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+sensor:
+  - platform: rest
+    name: CoffeeCherryPi
+    resource: http://192.168.0.10:5000/
