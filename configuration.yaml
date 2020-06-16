@@ -18,3 +18,10 @@ sensor:
   - platform: rest
     name: CoffeeCherryPi
     resource: http://192.168.0.10:5000/
+    
+switch:
+  - platform: rest
+    name: 'CoffeCherry Pi Smart'
+    resource: http://192.168.0.10:5000/smart/
+    body_on: 'on'
+    body_off: 'off'
