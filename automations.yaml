@@ -1,1 +1,49 @@
-[]
+- alias: BREW Notification - Gregson
+  description: Notify Gregson when CoffeeCherry Pi is up to BREW temperature
+  trigger:
+  - above: '99'
+    below: '101'
+    entity_id: sensor.coffeecherry_boiler_temperature_bottom
+    platform: numeric_state
+  action:
+  - data:
+      data:
+        channel: CoffeeCherry
+        clickAction: /lovelace/coffeecherry-pi
+        color: '#bf616a'
+        group: CoffeeCherry Pi
+        ledColor: red
+        priority: high
+        ttl: 0
+      message: Reached BREW Temperature
+      title: BREW
+    service: notify.mobile_app_gregson
+  - service: persistent_notification.create
+    data:
+      title: CoffeeCherry Pi
+      message: Reached BREW Temperature
+  id: 3b8d8203a8c441cbb8e0f8c8a07d1513
+- alias: STEAM Notification - Gregson
+  description: Notify Gregson when CoffeeCherry Pi is up to STEAM temperature
+  trigger:
+  - above: '149'
+    entity_id: sensor.coffeecherry_boiler_temperature_top
+    platform: numeric_state
+  action:
+  - data:
+      data:
+        clickAction: /lovelace/coffeecherry-pi
+        color: '#bf616a'
+        group: CoffeeCherry Pi
+        ledColor: red
+        ttl: 0
+        priority: high
+        channel: CoffeeCherry
+      message: Reached STEAM Temperature
+      title: STEAM
+    service: notify.mobile_app_gregson
+  - service: persistent_notification.create
+    data:
+      title: CoffeeCherry Pi
+      message: Reached STEAM Temperature
+  id: b88b75be98f548fd8fd882125b48d326

@@ -14,14 +14,40 @@ scene: !include scenes.yaml
 frontend:
   themes: !include_dir_merge_named themes
 
+binary_sensor coffeecherry:
+  - platform: rest
+    name: 'CoffeeCherry Pi'
+    device_class: connectivity
+    resource: http://192.168.0.10:5000/
+    
 sensor:
   - platform: rest
-    name: CoffeeCherryPi
-    resource: http://192.168.0.10:5000/
+    name: 'CoffeeCherry Tank'
+    resource: http://192.168.0.10:5000/tank/
+    
+  - platform: rest
+    name: 'CoffeeCherry Boiler Temperature (Bottom)'
+    resource: http://192.168.0.10:5000/brew/temperature
+    device_class: temperature
+    unit_of_measurement: 'C'
+    force_update: true
+    
+  - platform: rest
+    name: 'CoffeeCherry Boiler Temperature (Top)'
+    resource: http://192.168.0.10:5000/steam/temperature
+    device_class: temperature
+    unit_of_measurement: 'C'
     
 switch:
   - platform: rest
-    name: 'CoffeCherry Pi Smart'
-    resource: http://192.168.0.10:5000/smart/
+    name: 'CoffeCherry Pi Brew PID'
+    resource: http://192.168.0.10:5000/brew/
     body_on: 'on'
     body_off: 'off'
+    
+  - platform: rest
+    name: 'CoffeCherry Pi Steam PID'
+    resource: http://192.168.0.10:5000/steam/
+    body_on: 'on'
+    body_off: 'off'
+    
